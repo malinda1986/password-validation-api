@@ -22,6 +22,7 @@ $ yarn i
   _(Check the validity of the password)_
 - Open another terminal and run `yarn cli`
   _(this will console the result of password update 1/0 and compromised passwords)_
+- API doc is available at `http://localhost:3000/api#/`
 
 _Note: .env file added to the repo with DB connection details_
 
