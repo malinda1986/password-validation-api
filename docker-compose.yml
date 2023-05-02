@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    container_name: password-api
+    image: erasys/compromised-pw-api
+    depends_on:
+      - mysqldb
+    ports:
+      - 5000:5000
+ 
+  
+  mysqldb:
+    container_name: password-mysql
+    env_file: ./.env
+    environment:
+      MYSQL_PASSWORD: ${DATABASE_PASS}
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASS}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USER}
+    expose:
+      - 3306
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    restart: always
+    volumes:
+      - db-config:/etc/mysql
+      - db-data:/var/lib/mysql
+    #  - ./db/backup/files/:/docker-entrypoint-initdb.d
+   # command: mysql --user -u root --password=myapp myapp_docker < mydb.sql
+volumes:
+  db-config:
+  db-data:
